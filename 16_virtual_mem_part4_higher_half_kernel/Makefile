@@ -74,7 +74,7 @@ KERNEL_ELF = target/$(TARGET)/release/kernel
 RUSTFLAGS          = -C link-arg=-T$(LINKER_FILE) $(RUSTC_MISC_ARGS)
 RUSTFLAGS_PEDANTIC = $(RUSTFLAGS) -D warnings -D missing_docs
 
-FEATURES      = --features bsp_$(BSP)
+FEATURES      = --features bsp_$(BSP) --emit asm
 COMPILER_ARGS = --target=$(TARGET) \
     $(FEATURES)                    \
     --release
@@ -135,7 +135,7 @@ all: $(KERNEL_BIN)
 $(KERNEL_ELF):
 	$(call colorecho, "\nCompiling kernel - $(BSP)")
 	@RUSTFLAGS="$(RUSTFLAGS_PEDANTIC)" $(RUSTC_CMD)
-	@$(DOCKER_TOOLS) $(EXEC_TT_TOOL) $(TARGET) $(BSP) $(KERNEL_ELF)
+	@$(DOCKER_TOOLS) $(EXEC_TT_TOOL) $(TARGET) $(BSP) $(KERNEL_ELF) $(FEATURES)
 
 ##------------------------------------------------------------------------------
 ## Build the stripped kernel binary
@@ -200,7 +200,7 @@ objdump: $(KERNEL_ELF)
                 --section .text   \
                 --section .rodata \
                 --section .got    \
-                $(KERNEL_ELF) | rustfilt
+                $(KERNEL_ELF) | rustfilt > $(KERNEL_ELF).list
 
 ##------------------------------------------------------------------------------
 ## Run nm

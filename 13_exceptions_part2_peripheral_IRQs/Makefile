@@ -198,7 +198,7 @@ objdump: $(KERNEL_ELF)
                 --section .text   \
                 --section .rodata \
                 --section .got    \
-                $(KERNEL_ELF) | rustfilt
+                $(KERNEL_ELF) | rustfilt > $(KERNEL_BIN).list
 
 ##------------------------------------------------------------------------------
 ## Run nm

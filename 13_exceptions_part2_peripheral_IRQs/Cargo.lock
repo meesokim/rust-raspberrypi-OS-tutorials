@@ -17,10 +17,17 @@ version = "0.13.0"
 dependencies = [
  "cortex-a",
  "qemu-exit",
+ "ruspiro-interrupt",
  "test-macros",
  "test-types",
  "tock-registers",
 ]
+
+[[package]]
+name = "paste"
+version = "1.0.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0744126afe1a6dd7f394cb50a716dbe086cb06e255e53d8d0185d82828358fb5"
 
 [[package]]
 name = "proc-macro2"
@@ -44,6 +51,78 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "38bc8cc6a5f2e3655e0899c1b848643b2562f853f114bfec7be120678e3ace05"
 dependencies = [
  "proc-macro2",
+]
+
+[[package]]
+name = "ruspiro-arch-aarch64"
+version = "0.1.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "60ebe116b71a6c9c1253b2fce62e1337d714ce7dc3a5e78da87fc3e69e4c9407"
+dependencies = [
+ "ruspiro-register",
+]
+
+[[package]]
+name = "ruspiro-channel"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "03089c61a4a2fc311b8a2b83cbba2cae31f83efe85e07bed256ac4564cdbac2b"
+dependencies = [
+ "ruspiro-arch-aarch64",
+]
+
+[[package]]
+name = "ruspiro-interrupt"
+version = "0.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "33da74e37369432706019c4516bef926f593a6e8279b817308667a89de43ccbd"
+dependencies = [
+ "paste",
+ "ruspiro-arch-aarch64",
+ "ruspiro-channel",
+ "ruspiro-interrupt-macros",
+ "ruspiro-mmio-register",
+ "ruspiro-singleton",
+]
+
+[[package]]
+name = "ruspiro-interrupt-macros"
+version = "0.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2c8dc334d64dd49393df1f56cfe8e78bf65481da81c783d85163162a889076e5"
+dependencies = [
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "ruspiro-lock"
+version = "0.4.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "22833da3c9a3f659e42c695852b778affe48dc3566e5044da7c1db40495e65e9"
+
+[[package]]
+name = "ruspiro-mmio-register"
+version = "0.1.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f994b585def7c41d7241391e23fe0588ef2dfc06573512b7aa6f75024db06c84"
+dependencies = [
+ "ruspiro-register",
+]
+
+[[package]]
+name = "ruspiro-register"
+version = "0.5.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6c398a7ffbb98aa0c91a4118eeb28fed510e58b02014e9020e269808e870fcf6"
+
+[[package]]
+name = "ruspiro-singleton"
+version = "0.4.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7b2c5eacce361d2fbe601ada9717c93ffbd8bd9670afe3eea9496bb993db19ed"
+dependencies = [
+ "ruspiro-lock",
 ]
 
 [[package]]
